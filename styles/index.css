@@ -1,0 +1,532 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+/* ===== Reset ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    background: black;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+}
+
+img {
+    background: transparent;
+}
+
+h1,
+p {
+    margin-top: 0.333rem;
+    margin-bottom: 0.333rem;
+}
+
+.container {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+@keyframes slide-transparency {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.animate-opacity {
+    animation-name: slide-transparency;
+    animation-iteration-count: infinite;
+}
+
+.freq-5 {
+    animation-duration: 5s;
+}
+
+.freq-6 {
+    animation-duration: 6.33s;
+}
+
+.freq-7 {
+    animation-duration: 7s;
+}
+
+.freq-8 {
+    animation-duration: 8.88s;
+}
+
+.freq-9 {
+    animation-duration: 9s;
+}
+
+.freq-10 {
+    animation-duration: 10.17s;
+}
+
+.delay-2 {
+    animation-delay: 1.33s;
+}
+
+.delay-4 {
+    animation-delay: 2.11s;
+}
+
+.bg {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #000;
+    z-index: -1000;
+}
+
+.z-1,
+.z-2,
+.z-3 {
+    position: absolute;
+    width: 150vw;
+    height: 150vw;
+    left: -50vw;
+    top: -50vw;
+    transform-origin: center;
+}
+
+.tile {
+    overflow: hidden;
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-repeat: repeat;
+    background-size: 512px 512px;
+}
+
+.top-left {
+    background-image: url("/img/topleft.png");
+}
+
+.top-right {
+    background-image: url("/img/topright.png");
+}
+
+.bottom-left {
+    background-image: url("/img/bottomleft.png");
+}
+
+.bottom-right {
+    background-image: url("/img/bottomright.png");
+}
+
+.sky {
+    position: absolute;
+    width: 40vh;
+    height: 30vh;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: auto;
+    pointer-events: none;
+}
+
+.sky.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.skytext {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+}
+
+.sky.show .skytext {
+    opacity: 1;
+}
+
+.star {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: white;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 10px white;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.star:hover {
+    transform: scale(1.5);
+    box-shadow: 0 0 20px #fff;
+}
+
+#text {
+    max-height: 10rem;
+    overflow: hidden;
+    overflow: scroll;
+    overflow-x: hidden;
+    padding: 0.5rem;
+}
+
+#text::-webkit-scrollbar {
+    background-color: transparent;
+}
+
+#text::-webkit-scrollbar-thumb {
+    background-color: #222021;
+    border-radius: 1rem;
+}
+
+#text::-webkit-scrollbar-thumb:hover {
+    background-color: #000000;
+}
+
+
+
+/* ===== Modal ===== */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: #303234;
+    padding: 1.5rem;
+    border-radius: 12px;
+    max-width: 20rem;
+    max-height: 30rem;
+    text-align: center;
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
+    animation: fadeIn 0.5s ease;
+    overflow-wrap: break-word
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    font-weight: normal;
+}
+
+.close {
+    margin-top: 20px;
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.close:hover {
+    opacity: 1;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== Text Styling ===== */
+
+.text-div {
+    position: relative;
+    width: 100vw;
+    min-height: 150px;
+    padding: 1.5rem;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.text {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 1s ease;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30vh;
+    height: 10rem;
+}
+
+.skytext {
+    transition: opacity 1s ease;
+    font-size: 1.5rem;
+    cursor: pointer;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.text.active {
+    opacity: 1;
+    position: absolute;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30vh;
+    height: 10rem;
+}
+
+
+.text.fadeout {
+    opacity: 0;
+}
+
+/* Responsive */
+/* mobile */
+
+/* small phones */
+@media only screen and (max-width: 600px) and (orientation: portrait) {
+    .sky {
+        width: 85vw;
+        height: 40vh;
+    }
+
+    .text {
+        width: 20vh;
+        height: 10rem;
+    }
+
+    .text.active {
+        width: 20vh;
+        height: 10rem;
+    }
+}
+
+@media only screen and (max-width: 600px) and (orientation: landscape) {
+    .sky {
+        width: 75vw;
+        height: 90vh;
+    }
+
+    .text {
+        width: 100vh;
+        height: 10rem;
+    }
+
+    .text.active {
+        width: 100vh;
+        height: 10rem;
+    }
+}
+
+/* phones / small tablets */
+@media only screen and (min-width: 601px) and (orientation: portrait) {
+    .sky {
+        width: 65vw;
+        height: 26vh;
+    }
+
+    .text {
+        width: 30vh;
+        height: 10rem;
+    }
+
+    .text.active {
+        width: 30vh;
+        height: 10rem;
+    }
+}
+
+@media only screen and (min-width: 601px) and (orientation: landscape) {
+    .sky {
+        width: 65vw;
+        height: 80vh;
+    }
+
+    .text {
+        width: 60vh;
+        height: 10rem;
+    }
+
+    .text.active {
+        width: 60vh;
+        height: 10rem;
+    }
+}
+
+/* tablets */
+@media only screen and (min-width: 768px) and (orientation: portrait) {
+    .sky {
+        width: 55vw;
+        height: 30vh;
+    }
+
+    .text {
+        width: 30vh;
+        height: 10rem;
+    }
+
+    .text.active {
+        width: 30vh;
+        height: 10rem;
+    }
+}
+
+@media only screen and (min-width: 768px) and (orientation: landscape) {
+    .sky {
+        width: 55vw;
+        height: 80vh;
+    }
+
+    .text {
+        width: 80vh;
+        height: 10rem;
+    }
+
+    .text.active {
+        width: 80vh;
+        height: 10rem;
+    }
+}
+
+/* small laptops */
+@media only screen and (min-width: 992px) and (orientation: portrait) {
+    .sky {
+        width: 50vw;
+        height: 25vh;
+    }
+
+    .text {
+        width: 50vh;
+        height: 10rem;
+    }
+
+    .text.active {
+        width: 50vh;
+        height: 10rem;
+    }
+}
+
+@media only screen and (min-width: 992px) and (orientation: landscape) {
+    .sky {
+        width: 40vw;
+        height: 70vh;
+    }
+
+    .text {
+        width: 100vh;
+        height: 10rem;
+    }
+
+    .text.active {
+        width: 100vh;
+        height: 10rem;
+    }
+}
+
+/* pc */
+@media only screen and (min-width: 1024px) and (orientation: portrait) {
+    .sky {
+        width: 45vw;
+        height: 24vh;
+    }
+
+    .text {
+        width: 60vh;
+        height: 10rem;
+    }
+
+    .text.active {
+        width: 60vh;
+        height: 10rem;
+    }
+}
+
+@media only screen and (min-width: 1024px) and (orientation: landscape) {
+    .sky {
+        width: 40vw;
+        height: 70vh;
+    }
+
+    .text {
+        width: 100vh;
+        height: 10rem;
+    }
+
+    .text.active {
+        width: 100vh;
+        height: 10rem;
+    }
+}
+
+/* large screens */
+@media only screen and (min-width: 1200px) and (orientation: portrait) {
+    .sky {
+        width: 42vw;
+        height: 22vh;
+    }
+}
+
+@media only screen and (min-width: 1200px) and (orientation: landscape) {
+    .sky {
+        width: 38vw;
+        height: 70vh;
+    }
+}
+
+@media only screen and (min-width: 1440px) and (orientation: portrait) {
+    .sky {
+        width: 40vw;
+        height: 20vh;
+    }
+}
+
+@media only screen and (min-width: 1440px) and (orientation: landscape) {
+    .sky {
+        width: 35vw;
+        height: 70vh;
+    }
+}
+
+@media only screen and (min-width: 1500px) and (orientation: portrait) {
+    .sky {
+        width: 38vw;
+        height: 20vh;
+    }
+}
+
+@media only screen and (min-width: 1500px) and (orientation: landscape) {
+    .sky {
+        width: 32vw;
+        height: 48vh;
+    }
+}

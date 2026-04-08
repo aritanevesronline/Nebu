@@ -321,12 +321,12 @@ p {
     }
 
     .text {
-        width: 20vh;
+        width: 35vh;
         height: 10rem;
     }
 
     .text.active {
-        width: 20vh;
+        width: 35vh;
         height: 10rem;
     }
 }
